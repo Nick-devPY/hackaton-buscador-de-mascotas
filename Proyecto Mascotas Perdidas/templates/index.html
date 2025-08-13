@@ -121,7 +121,7 @@
                 <img src="{{ url_for('static', filename='uploads/' + mascota.foto_animal) }}" 
                      alt="Foto de {{ mascota.nombre_animal }}" 
                      class="w-full h-40 sm:h-48 md:h-56 object-cover rounded mb-3 cursor-pointer"
-                     onclick="abrirModal(this)">
+                     onclick="mostrarImagen(this.src)">
               {% endif %}
               <p class="text-xl font-bold mb-2">{{ mascota.nombre_animal }}</p>
               <p class="text-gray-700">{{ mascota.descripcion_animal }}</p>
