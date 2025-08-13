@@ -100,34 +100,38 @@
 
 
     <!-- Aquí empieza el listado de reportes -->
-    <section id= "Mostrar_Reportes" class="max-w-6xl mx-auto mt-6 p-4 bg-white rounded shadow scroll-mt-24">
+    <section id="Mostrar_Reportes" class="max-w-6xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 bg-white rounded shadow scroll-mt-20">
       <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
           Reportes de mascotas perdidas
         </h2>
         <p>
+          <a href="{{ url_for('mostrar_reporte') }}" 
+             class="inline-block border border-blue-500 text-blue-700 px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors duration-300">
+            Crear nuevo reporte
           </a>
-            <a href="{{ url_for('mostrar_reporte') }}" class="border border-blue text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors duration-300">
-                    Crear nuevo reporte
-            </a>
         </p>
       </div>
+      
       {% if mascotas %}
-      <div class="grid grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {% for mascota in mascotas %}
-            <div class="border rounded p-4 bg-gray-50 shadow">
+            <div class="border rounded p-4 bg-gray-50 shadow hover:shadow-lg transition">
               {% if mascota.foto_animal %}
-                <img src="{{ url_for('static', filename='uploads/' + mascota.foto_animal) }}" alt="Foto de {{ mascota.nombre_animal }}" class="w-full h-48 object-cover rounded mb-3" onclick="mostrarImagen(this.src)">
+                <img src="{{ url_for('static', filename='uploads/' + mascota.foto_animal) }}" 
+                     alt="Foto de {{ mascota.nombre_animal }}" 
+                     class="w-full h-40 sm:h-48 md:h-56 object-cover rounded mb-3 cursor-pointer"
+                     onclick="abrirModal(this)">
               {% endif %}
-              <p class= "text-xl font-bold mb-2"> {{ mascota.nombre_animal }}</p>
-              <p class="text-gray-700"> {{ mascota.descripcion_animal }}</p>
-              <p class="text-sm text-gray-500 mt-2"> 📍 {{ mascota.ubicacion_animal }}</p>
-              <p class="text-sm text-gray-500 mt-2"> 📞 {{ mascota.contacto_animal }}</p>
+              <p class="text-xl font-bold mb-2">{{ mascota.nombre_animal }}</p>
+              <p class="text-gray-700">{{ mascota.descripcion_animal }}</p>
+              <p class="text-sm text-gray-500 mt-2">📍 {{ mascota.ubicacion_animal }}</p>
+              <p class="text-sm text-gray-500 mt-2">📞 {{ mascota.contacto_animal }}</p>
             </div>
           {% endfor %}
       </div>
       {% else %}
-        <p>No hay reportes aún.</p>
+        <p class="text-center text-gray-500">No hay reportes aun.</p>
       {% endif %}
     </section>
     <!-- Fin del listado de reportes-->
