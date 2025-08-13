@@ -41,7 +41,6 @@
                         </summary>
                         <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50">
                             <a href="{{ url_for('index') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Inicio</a>
-                            <a href="#Mision/Vision" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sobre nosotros</a>
                             {% if session.get('usuario') %}
                                 <li class="font-semibold">Hola, {{ session['usuario'] }}</li>
                                 <a href="{{ url_for('logout') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cerrar sesión</a>
