@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar reporte</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='uploads/logo.png') }}">
 
     <!-- CDN de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -46,7 +47,7 @@
                 <!-- Navegación de Escritorio -->
                 <div class="hidden md:flex space-x-8">
                     <a href="{{ url_for('index') }}" class="text-gray-700 hover:text-primary transition-colors duration-300">Inicio</a>
-                    <a href="#Mision/Vision" class="text-gray-700 hover:text-primary transition-colors duration-300">Sobre nosotros</a>
+                    <a href="sobre_nosotros" class="text-gray-700 hover:text-primary transition-colors duration-300">Sobre nosotros</a>
                     {% if session.get('usuario') %}
                         <li class="font-semibold">Hola, {{ session['usuario'] }}</li>
                         <a href="{{ url_for('logout') }}" class="text-gray-700 hover:text-primary transition-colors duration-300">Cerrar sesión</a>

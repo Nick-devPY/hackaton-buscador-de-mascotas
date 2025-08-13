@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de sesión</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='uploads/logo.png') }}">
 
     <!-- CDN de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -37,10 +38,7 @@
 
    
                 <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                        <i class="fas fa-file-alt text-white text-sm"></i>
-                    </div>
-                    <span class="text-xl font-bold text-gray-800">Find My Pet</span>
+                    <img src="{{ url_for('static', filename='uploads/logo_azul.png') }}" alt="logo" class="w-48 h-20 object-contain">
                 </div>
 
                 <!-- Navegación de Escritorio -->
@@ -52,6 +50,7 @@
                         <a href="{{ url_for('logout') }}" class="text-gray-700 hover:text-primary transition-colors duration-300">Cerrar sesión</a>
                     {% else %}
                         <a href="{{ url_for('login') }}" class="text-gray-700 hover:text-primary transition-colors duration-300">Iniciar sesión</a>
+                        <a href="{{ url_for('registro') }}" class="text-gray-700 hover:text-primary transition-colors duration-300">Registrarse</a>
                     {% endif %}
                 </div>
 

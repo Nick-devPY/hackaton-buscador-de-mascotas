@@ -5,9 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sobre nosotros</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='uploads/logo.png') }}">
 </head>
 
 <body class="bg-white font-sans">
+
+      <!-- Encabezado/Navegación -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                
+                <body class="bg-gray-100">
+
+   
+                <div class="flex items-center space-x-2">
+                    <img src="{{ url_for('static', filename='uploads/logo_azul.png') }}" alt="logo" class="w-48 h-20 object-contain">
+                </div>
+
+                <!-- Navegación de Escritorio -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="{{ url_for('index') }}" class="text-gray-700 hover:text-primary transition-colors duration-300">Inicio</a>
+                    <a href="sobre_nosotros" class="text-gray-700 hover:text-primary transition-colors duration-300">Sobre nosotros</a>
+                    {% if session.get('usuario') %}
+                        <li class="font-semibold">Hola, {{ session['usuario'] }}</li>
+                        <a href="{{ url_for('logout') }}" class="text-gray-700 hover:text-primary transition-colors duration-300">Cerrar sesión</a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="text-gray-700 hover:text-primary transition-colors duration-300">Iniciar sesión</a>
+                    {% endif %}
+                </div>
+
+                <!-- Menú Móvil -->
+                <div class="md:hidden">
+                    <details class="relative">
+                        <summary class="text-gray-700 hover:text-primary cursor-pointer">
+                            <i class="fas fa-bars text-xl"></i>
+                        </summary>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50">
+                            <a href="{{ url_for('index') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Inicio</a>
+                            <a href="#Mision/Vision" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sobre nosotros</a>
+                            {% if session.get('usuario') %}
+                                <li class="font-semibold">Hola, {{ session['usuario'] }}</li>
+                                <a href="{{ url_for('logout') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cerrar sesión</a>
+                            {% else %}
+                                <a href="{{ url_for('login') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Iniciar sesión</a>
+                            {% endif %}
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </nav>
+    </header>
+
 
   <!-- Sección Principal -->
   <main class="w-full max-w-5xl mx-auto my-8 px-4 sm:px-6 lg:px-8 py-6 bg-blue-100 shadow-md border-l-4 border-blue-500 rounded-md">
@@ -16,7 +64,7 @@
         <em>
           En Find My Pet nos comprometemos a ofrecer una solución eficaz, accesible y solidaria para la localización de mascotas perdidas o encontradas. Nuestra misión es facilitar el reencuentro entre animales extraviados y sus familias, promoviendo una red colaborativa entre vecinos, rescatistas y amantes de los animales.
           <br><br>
-          A través de nuestra página web y redes sociales, brindamos un espacio gratuito y de fácil acceso donde cualquier persona puede reportar la pérdida o hallazgo de una mascota. Al centralizar esta información en una plataforma confiable y actualizada, aumentamos significativamente las probabilidades de que cada animal regrese a su hogar de manera segura y en el menor tiempo posible. 
+          A través de nuestra página web brindamos un espacio gratuito y de fácil acceso donde cualquier persona puede reportar la pérdida o hallazgo de una mascota. Al centralizar esta información en una plataforma confiable y actualizada, aumentamos significativamente las probabilidades de que cada animal regrese a su hogar de manera segura y en el menor tiempo posible. 
           <br><br>
           Creemos en el poder de la comunidad y en la importancia de actuar con empatía y responsabilidad ante situaciones que afectan a nuestros compañeros de vida. Por ello, trabajamos constantemente en mejorar nuestros servicios y expandir nuestro alcance, para que ninguna mascota se quede sin ayuda. 
           <br><br>
@@ -32,9 +80,6 @@
       <em>
         Somos una página web sin fines de lucro, diseñada para reportar y localizar mascotas desaparecidas.
         Nuestro propósito es brindar una alternativa accesible y solidaria para todas aquellas personas que buscan reencontrarse con sus compañeros peludos, así como facilitar que otros puedan colaborar compartiendo información útil para su regreso a casa.
-        <br><br>
-        Aquí podrás encontrar un listado de reportes de mascotas extraviadas, con sus datos, imágenes, ubicación aproximada y actualizaciones.
-        También se podrán reportar mascotas encontradas que están en busca de sus dueños.
       </em>
     </p>
   </section>

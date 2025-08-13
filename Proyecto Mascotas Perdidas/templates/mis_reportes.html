@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis reportes</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='uploads/logo.png') }}">
 
     <!-- CDN de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -37,16 +38,13 @@
 
    
                 <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                        <i class="fas fa-file-alt text-white text-sm"></i>
-                    </div>
-                    <span class="text-xl font-bold text-gray-800">Find My Pet</span>
+                    <img src="{{ url_for('static', filename='uploads/logo_azul.png') }}" alt="logo" class="w-48 h-20 object-contain">
                 </div>
 
                 <!-- Navegación de Escritorio -->
                 <div class="hidden md:flex space-x-8">
                     <a href="{{ url_for('index') }}" class="text-gray-700 hover:text-primary transition-colors duration-300">Inicio</a>
-                    <a href="#Mision/Vision" class="text-gray-700 hover:text-primary transition-colors duration-300">Sobre nosotros</a>
+                    <a href="sobre_nosotros" class="text-gray-700 hover:text-primary transition-colors duration-300">Sobre nosotros</a>
                     {% if session.get('usuario') %}
                         <li class="font-semibold">Hola, {{ session['usuario'] }}</li>
                         <a href="{{ url_for('logout') }}" class="text-gray-700 hover:text-primary transition-colors duration-300">Cerrar sesión</a>
@@ -88,6 +86,7 @@
                         {% if r.foto_animal %}
                             <img src="{{ url_for('static', filename='uploads/' + r.foto_animal) }}" alt="Foto {{ r.nombre_animal }}" class="w-full h-48 object-cover rounded mb-3">
                         {% endif %}
+
                         <h2 class="font-semibold text-xl mb-2">{{ r.nombre_animal }}</h2>
                         <p><strong>Descripción:</strong> {{ r.descripcion_animal }}</p>
                         <p><strong>Ubicación:</strong> {{ r.ubicacion_animal }}</p>
@@ -95,40 +94,21 @@
 
                         <div class="mt-4 flex gap-2">
                             <a href="{{ url_for('editar_reporte', id=r.id) }}" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">Editar</a>
-
                             <form action="{{ url_for('marcar_encontrado', id=r.id) }}" method="POST" onsubmit="return confirm('¿Está seguro de que encontró al animal?');">
                                 <button type="submit" class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">Marcar como Encontrado</button>
                             </form>
                         </div>
+
+                        <!-- Estado -->
                         <div class="py-4">
-                            {% for mascota in reportes %}
-                            <tr>
-                                <!-- <td>{{ mascota.nombre_animal }}</td> -->
-                                <td>
-                                    {% if mascota.estado_animal == "pendiente" %}
-                                        <p>Estado: <span class="text-yellow-500">Pendiente</span></p>
-                                        
-                                    {% elif mascota.estado_animal == "aprobado" %}
-                                        <p>Estado: <span class="text-green-500">Aprobado</span></p>
-                                        
-                                    {% elif mascota.estado_animal == "rechazado" %}
-                                        <p>Estado: <span class="text-red-500">Rechazado</span></p>
-                                        
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if mascota.estado_animal == "rechazado" %}
-                                        <p>
-                                            Motivo: {{ mascota.motivo_rechazo }}
-                                        </p>
-                                        
-                                        
-                                    {% else %}
-                                        
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            {% endfor %}
+                            {% if r.estado_animal == "pendiente" %}
+                                <p>Estado: <span class="text-yellow-500">Pendiente</span></p>
+                            {% elif r.estado_animal == "aprobado" %}
+                                <p>Estado: <span class="text-green-500">Aprobado</span></p>
+                            {% elif r.estado_animal == "rechazado" %}
+                                <p>Estado: <span class="text-red-500">Rechazado</span></p>
+                                <p>Motivo: {{ r.motivo_rechazo }}</p>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
@@ -137,6 +117,5 @@
             <p>No tienes reportes activos.</p>
         {% endif %}
     </div>
-
 </body>
 </html>
