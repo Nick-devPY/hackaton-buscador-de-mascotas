@@ -239,13 +239,12 @@ def logout():
 # Panel de mis reportes
 @app.route("/mis_reportes")
 def mis_reportes():
-    if not session.get("user_id"):
+    if "user_id" not in session:
         return redirect(url_for("login"))
 
-    user_id = session["user_id"]
     reportes = (
-        Mascotas.query.filter_by(user_id=user_id)
-        .filter(Mascotas.estado_animal != "encontrado")
+        Mascotas.query.filter_by(user_id=session["user_id"])
+        .order_by(Mascotas.id.desc())
         .all()
     )
     return render_template("mis_reportes.html", reportes=reportes)
